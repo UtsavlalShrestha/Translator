@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head lang="en">
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="text"], select {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .res {
+            margin-top: 250px;
+            margin-left: -150px;
+            padding: 15px;
+            background-color: #e9f5ff;
+            border-left: 4px solid #007bff;
+            border-radius: 6px;
+            
+        }
+
+        .res.show {
+            display: block;
+        }
+
+        .res h3 {
+            color: #007bff;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .res p {
+            color: #333;
+            font-size: 16px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="text" placeholder="Enter text to translate">
+        <select name="language">
+            <option value="Nepali">Nepali</option>
+            <option value="German">German</option>
+            <option value="Korean">Korean</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Hindi">Hindi</option>
+            <option value="French">French</option>
+            <option value="Turkish">Turkish</option>
+        </select>
+
+        <input type="submit" value="Translate">
+    </form>
+    <br>
+    <div class="res">
+        {% if translation %}
+        <h3>Translated Text:</h3>
+        <p>{{ translation }}</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+</html>
